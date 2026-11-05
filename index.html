@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blow out the candle</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1 id="msg">Make a wish!</h1>
+
+<div class="stage" id="stage">
+  <div class="glow"></div>
+  <svg viewBox="0 0 320 336" role="img" aria-label="A cake with one lit candle">
+    <ellipse cx="160" cy="312" rx="150" ry="16" fill="var(--plate)"/>
+    <!-- bottom tier -->
+    <rect x="40" y="220" width="240" height="86" rx="10" fill="var(--sponge)"/>
+    <path d="M40 232 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 V220 H40Z" fill="var(--icing)"/>
+    <!-- top tier -->
+    <rect x="80" y="150" width="160" height="72" rx="10" fill="var(--sponge)"/>
+    <path d="M80 162 q13 20 27 0 q13 20 27 0 q13 20 26 0 q13 20 27 0 q13 20 27 0 q13 20 26 0 V150 H80Z" fill="var(--icing2)"/>
+    <circle cx="100" cy="270" r="6" fill="#fff4e6"/><circle cx="160" cy="278" r="6" fill="#e0457b"/><circle cx="220" cy="270" r="6" fill="#fff4e6"/>
+    <circle cx="120" cy="195" r="5" fill="#e0457b"/><circle cx="200" cy="195" r="5" fill="#e0457b"/>
+    <!-- candle -->
+    <rect x="152" y="94" width="16" height="58" rx="3" fill="#7fd1c7"/>
+    <path d="M152 108 l16 8 M152 122 l16 8 M152 136 l16 8" stroke="#fff4e6" stroke-width="4"/>
+    <rect x="159" y="84" width="2" height="12" fill="#3b2a1f"/>
+    <!-- flame -->
+    <g class="flame">
+      <path d="M160 40 C174 58 176 76 160 86 C144 76 146 58 160 40Z" fill="#ffb02e"/>
+      <path d="M160 58 C167 68 168 78 160 84 C152 78 153 68 160 58Z" fill="#fff3a0"/>
+    </g>
+    <!-- smoke -->
+    <path class="smoke" d="M160 80 q-8 -10 0 -20 q8 -10 0 -20"/>
+    <path class="smoke s2" d="M160 80 q8 -10 0 -20 q-8 -10 0 -20"/>
+    <!-- breath -->
+    <g class="puff"><path d="M60 70 h60 M70 82 h50 M66 58 h54" stroke="#fff4e6" stroke-width="5" stroke-linecap="round" opacity=".7"/></g>
+  </svg>
+</div>
+
+<button id="btn" type="button">Blow out the candle</button>
+<p class="lyrics" id="lyrics" aria-live="polite"></p>
+<div class="banner" id="banner" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

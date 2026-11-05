@@ -1,0 +1,66 @@
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#2a1f3d; --text:#fff4e6; --plate:#e9e2f5;
+  --sponge:#f3c77a; --icing:#ff9fb8; --icing2:#ffd0dc; --btn:#ffd166; --btnText:#2a1f3d;
+  --glow:rgba(255,200,100,.35);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){ --bg:#fbe9d7; --text:#3b2a1f; --plate:#fff; --btn:#3b2a1f; --btnText:#fff4e6; --glow:rgba(255,190,80,.5); }
+}
+:root[data-theme="light"]{ --bg:#fbe9d7; --text:#3b2a1f; --plate:#fff; --btn:#3b2a1f; --btnText:#fff4e6; --glow:rgba(255,190,80,.5); }
+:root[data-theme="dark"]{ --bg:#2a1f3d; --text:#fff4e6; }
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:"Fredoka","Trebuchet MS",system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:20px;transition:background .8s}
+body.dark-room{filter:brightness(.8)}
+h1{font-size:clamp(1.4rem,5vw,2rem);margin:0;font-weight:600;text-align:center;min-height:1.3em}
+.stage{position:relative;width:min(320px,80vw);aspect-ratio:1/1.05}
+.glow{position:absolute;left:50%;top:6%;width:70%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 65%);transition:opacity .6s}
+.out .glow{opacity:0}
+svg{width:100%;height:100%;overflow:visible;position:relative}
+.flame{transform-origin:160px 74px;animation:flick .25s infinite alternate ease-in-out;transition:opacity .25s,transform .35s}
+@keyframes flick{from{transform:scale(1,1) rotate(-2deg)}to{transform:scale(.92,1.08) rotate(2deg)}}
+.out .flame{animation:none;opacity:0;transform:scale(.3) translateX(14px)}
+.smoke{opacity:0;fill:none;stroke:#9a93a8;stroke-width:3;stroke-linecap:round}
+.out .smoke{animation:rise 2.2s ease-out forwards}
+.out .smoke.s2{animation-delay:.25s}
+@keyframes rise{0%{opacity:0;transform:translate(0,0)}20%{opacity:.8}100%{opacity:0;transform:translate(10px,-46px)}}
+.puff{opacity:0}
+.blowing .puff{animation:puff .6s ease-out}
+@keyframes puff{0%{opacity:0;transform:translateX(-30px)}40%{opacity:.8}100%{opacity:0;transform:translateX(30px)}}
+button{font:inherit;font-weight:600;font-size:1.1rem;padding:14px 28px;border:0;border-radius:999px;background:var(--btn);color:var(--btnText);cursor:pointer;transition:transform .15s}
+button:active{transform:scale(.95)}
+button:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+.conf{position:fixed;top:-12px;width:10px;height:14px;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(540deg)}}
+.stage{animation:drop .9s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes drop{from{transform:translateY(-120%) scale(.9);opacity:0}to{transform:none;opacity:1}}
+.stage svg{animation:bob 3s ease-in-out infinite;transform-origin:50% 95%}
+@keyframes bob{50%{transform:scale(1,1.02)}}
+.blowing svg{animation:wobble .45s ease-in-out}
+@keyframes wobble{25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
+.out svg{animation:jig .8s ease-out,bob 3s .8s ease-in-out infinite}
+@keyframes jig{0%{transform:scale(1,.9)}30%{transform:scale(1,1.08)}60%{transform:scale(1,.97)}100%{transform:none}}
+.blowing .flame{animation:lean .45s ease-in forwards}
+@keyframes lean{to{transform:rotate(28deg) skewX(-22deg) scale(.8,.85)}}
+.pop{animation:pop .6s cubic-bezier(.3,1.8,.5,1)}
+.banner{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;padding:20px;pointer-events:none;font-size:clamp(2.6rem,13vw,6rem);font-weight:700;text-align:center;color:var(--text);text-shadow:0 4px 0 rgba(0,0,0,.25),0 0 30px var(--glow);opacity:0;z-index:5}
+.banner.show{animation:bfade 3.8s forwards}
+@keyframes bfade{0%{opacity:1}80%{opacity:1}100%{opacity:0}}
+.lyrics{margin:0;min-height:3.4em;max-width:90vw;text-align:center;font-size:clamp(1.2rem,4.5vw,1.7rem);font-weight:600;white-space:pre-wrap}
+.syl{display:inline-block;white-space:pre;opacity:.35;transition:opacity .2s,transform .2s}
+.syl.on{opacity:1}
+.banner .w{display:inline-block;white-space:nowrap;margin:0 .15em}
+.banner .l{display:inline-block;animation:letter .6s cubic-bezier(.3,1.8,.5,1) both}
+@keyframes letter{from{transform:translateY(60px) scale(.3) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion: reduce){.banner .l{animation:none}}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+button{animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--glow)}70%,100%{box-shadow:0 0 0 18px transparent}}
+.ball{position:fixed;bottom:-90px;width:44px;height:56px;border-radius:50% 50% 48% 48%;pointer-events:none;animation:float linear forwards}
+.ball::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:40px;background:currentColor;opacity:.5}
+@keyframes float{to{transform:translate(var(--dx),-120vh) rotate(8deg)}}
+@media (prefers-reduced-motion: reduce){.flame,.stage,.stage svg,.out svg,.blowing svg,button{animation:none}.conf,.ball{display:none}}
